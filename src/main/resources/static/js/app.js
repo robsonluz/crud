@@ -45,7 +45,7 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 			if(noticia) {
 				$location.path('/noticias');
 			}
-    	});
+		});
 	}
 	
 	//Chama o método definido na rota
