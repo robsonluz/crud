@@ -49,7 +49,7 @@ public class NoticiaController {
 	}		
 	
 	/**
-	 * Retorna uma notícia por id
+	 * Remove uma notícia por id
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public Message delete(@PathVariable Long id) {

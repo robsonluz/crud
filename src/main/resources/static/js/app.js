@@ -79,4 +79,3 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 		$scope[$route.current.method]();
 	}
 });
-
