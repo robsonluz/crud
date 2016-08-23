@@ -1,5 +1,5 @@
 <div class="list-group">
-  <a class="list-group-item"  ng-repeat="noticia in noticias">
+  <a href="#/noticias/{{noticia.id}}" class="list-group-item" ng-repeat="noticia in noticias">
   	<h4>{{noticia.titulo}}</h4>
   	<small>{{noticia.texto}}</small>
   </a>

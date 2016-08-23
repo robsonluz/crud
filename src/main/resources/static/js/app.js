@@ -20,6 +20,18 @@ app.config(['$routeProvider', function($routerProvider){
 			controller: 'NoticiaController',
 			method: 'create'
 		})
+		
+		.when('/noticias/:id', {
+			templateUrl: 'noticias-show.html',
+			controller: 'NoticiaController',
+			method: 'show'
+		})		
+		
+		.when('/noticias/:id/edit', {
+			templateUrl: 'noticias-form.html',
+			controller: 'NoticiaController',
+			method: 'show'
+		})		
 	;
 }]);
 
@@ -43,10 +55,24 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	$scope.save = function() {
 		NoticiaService.save($scope.noticia, function(noticia){
 			if(noticia) {
-				$location.path('/noticias');
+				//Redireciona para a tela de visualizacao
+				$location.path('/noticias/' + noticia.id);
 			}
 		});
 	}
+	
+	//Visualização
+	$scope.show = function() {
+		$scope.noticia = NoticiaService.get({"id": $routeParams.id});
+	}	
+	
+	$scope.remove = function() {
+		if(confirm('Confirma a Exclusão?')) {
+	    	NoticiaService.remove($scope.noticia, function(){
+	    		$location.path('/noticias');
+	    	});
+		}
+    }	
 	
 	//Chama o método definido na rota
 	if($route.current.method){ 
