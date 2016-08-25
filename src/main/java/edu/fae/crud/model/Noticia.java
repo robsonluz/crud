@@ -3,6 +3,7 @@ package edu.fae.crud.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * 
@@ -17,11 +18,15 @@ public class Noticia {
 	private String titulo;
 	private String texto;
 	
+	@ManyToOne
+	private Categoria categoria;
+	
 	public Noticia() {
 	}
-	public Noticia(String titulo, String texto) {
+	public Noticia(String titulo, String texto, Categoria categoria) {
 		this.titulo = titulo;
 		this.texto = texto;
+		this.categoria = categoria;
 	}
 	
 	public Long getId() {
@@ -41,6 +46,12 @@ public class Noticia {
 	}
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }

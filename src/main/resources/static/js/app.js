@@ -41,8 +41,12 @@ app.factory('NoticiaService', function($resource) {
 	return $resource('/api/noticias/:id', {}, {});
 });
 
+app.factory('CategoriaService', function($resource) {
+	return $resource('/api/categorias/:id', {}, {});
+});
+
 //NoticiaController
-app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService) {
+app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService, CategoriaService) {
 	//Lista
 	$scope.list = function() {
 		$scope.noticias = NoticiaService.query();	
@@ -50,7 +54,13 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	//Novo
 	$scope.create = function() {
 		$scope.noticia = {};
+		$scope.carregarDados();
 	}	
+	
+	$scope.carregarDados = function() {
+		$scope.categorias = CategoriaService.query();
+	}
+	
 	//Salva
 	$scope.save = function() {
 		NoticiaService.save($scope.noticia, function(noticia){
@@ -63,14 +73,15 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	
 	//Visualização
 	$scope.show = function() {
+		$scope.carregarDados();
 		$scope.noticia = NoticiaService.get({"id": $routeParams.id});
 	}	
 	
 	$scope.remove = function() {
 		if(confirm('Confirma a Exclusão?')) {
-	    	NoticiaService.remove($scope.noticia, function(){
-	    		$location.path('/noticias');
-	    	});
+		    	NoticiaService.remove($scope.noticia, function(){
+		    		$location.path('/noticias');
+		    	});
 		}
     }	
 	
