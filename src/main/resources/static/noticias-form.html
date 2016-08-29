@@ -14,9 +14,10 @@
     <select class="form-control" 
     		ng-options="categoria.nome for categoria in categorias track by categoria.id"
     		ng-model="noticia.categoria"
-    		convert-to-number
-    >
+    		convert-to-number>
     </select>
   </div>  
   <button class="btn btn-primary" ng-click="save()">Salvar</button>
 </form>
+
+

@@ -55,8 +55,15 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	$scope.create = function() {
 		$scope.noticia = {};
 		$scope.carregarDados();
+	}
+	
+	//Visualização
+	$scope.show = function() {
+		$scope.carregarDados();
+		$scope.noticia = NoticiaService.get({"id": $routeParams.id});
 	}	
 	
+	//Carrega as categorias
 	$scope.carregarDados = function() {
 		$scope.categorias = CategoriaService.query();
 	}
@@ -70,12 +77,6 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 			}
 		});
 	}
-	
-	//Visualização
-	$scope.show = function() {
-		$scope.carregarDados();
-		$scope.noticia = NoticiaService.get({"id": $routeParams.id});
-	}	
 	
 	$scope.remove = function() {
 		if(confirm('Confirma a Exclusão?')) {
