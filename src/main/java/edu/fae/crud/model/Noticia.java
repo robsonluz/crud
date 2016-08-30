@@ -1,8 +1,12 @@
 package edu.fae.crud.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -17,6 +21,9 @@ public class Noticia {
 	private Long id;
 	private String titulo;
 	private String texto;
+	
+	@ManyToMany
+	private List<Tag> tags = new ArrayList<>();
 	
 	@ManyToOne
 	private Categoria categoria;
@@ -52,6 +59,12 @@ public class Noticia {
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 	
 }

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngResource', 'ngRoute']);
+var app = angular.module('app', ['ngResource', 'ngRoute', 'fxpicklist']);
 
 /**
  * Configuração das Rotas (páginas do sistema)
@@ -41,12 +41,18 @@ app.factory('NoticiaService', function($resource) {
 	return $resource('/api/noticias/:id', {}, {});
 });
 
+//CategoriaService
 app.factory('CategoriaService', function($resource) {
 	return $resource('/api/categorias/:id', {}, {});
 });
 
+//CategoriaService
+app.factory('TagService', function($resource) {
+	return $resource('/api/tags/:id', {}, {});
+});
+
 //NoticiaController
-app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService, CategoriaService) {
+app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService, CategoriaService, TagService) {
 	//Lista
 	$scope.list = function() {
 		$scope.noticias = NoticiaService.query();	
@@ -66,6 +72,7 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	//Carrega as categorias
 	$scope.carregarDados = function() {
 		$scope.categorias = CategoriaService.query();
+		$scope.tags = TagService.query();
 	}
 	
 	//Salva
