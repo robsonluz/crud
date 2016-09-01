@@ -1,3 +1,14 @@
+<div class="input-group">
+	<input ng-model="busca" class="form-control" placeholder="Busca..."> 
+	<span class="input-group-btn">
+		<button ng-click="buscar()" 
+				class="btn btn-default" 
+				type="button">
+			Buscar
+		</button>
+	</span>
+</div>
+<hr/>
 <div class="list-group">
   <a href="#/noticias/{{noticia.id}}" class="list-group-item" ng-repeat="noticia in noticias">
   	<h4>{{noticia.titulo}}</h4>

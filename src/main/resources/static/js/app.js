@@ -53,6 +53,14 @@ app.factory('TagService', function($resource) {
 
 //NoticiaController
 app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService, CategoriaService, TagService) {
+	
+	$scope.busca = "";
+
+	//Lista
+	$scope.buscar = function() {
+		$scope.noticias = NoticiaService.query({texto:$scope.busca});	
+	}
+	
 	//Lista
 	$scope.list = function() {
 		$scope.noticias = NoticiaService.query();	
