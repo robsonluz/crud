@@ -26,10 +26,10 @@ public class CrudApplication {
 			Categoria esportes = 
 					categoriaRepository.save(new Categoria("Esportes"));			
 			
-			noticiaRepository.save(new Noticia("Notícia 1", "Texto da Notícia 1", artigos));
-			noticiaRepository.save(new Noticia("Notícia 2", "Texto da Notícia 2", artigos));
-			noticiaRepository.save(new Noticia("Notícia 3", "Texto da Notícia 3", esportes));
-			noticiaRepository.save(new Noticia("Notícia 4", "Texto da Notícia 4", esportes));
+			noticiaRepository.save(new Noticia("FAE realiza o I Simpósio de Direito Penal", "Evento, aberto ao público, reuniu especialistas no Teatro Bom Jesus", artigos));
+			noticiaRepository.save(new Noticia("Dia do Psicólogo na FAE", "Veja como foi a celebração dos alunos e professores da graduação", artigos));
+			noticiaRepository.save(new Noticia("Sustentabilidade em foco", "FAE participou de um dos principais eventos sobre o tema no Brasil", esportes));
+			noticiaRepository.save(new Noticia("Pedagogia: curso promove debates sobre carreira", "Profissionais convidadas compartilharam experiências e apontaram tendências do mercado de trabalho", esportes));
 			
 			tagRepository.save(new Tag("Automóveis"));
 			tagRepository.save(new Tag("Culinária"));

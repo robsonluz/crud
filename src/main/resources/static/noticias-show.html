@@ -10,6 +10,10 @@
     <label>Categoria</label>
     {{noticia.categoria.nome}}
   </div>  
+  <div class="form-group">
+    <label>Situação</label>
+    {{noticia.situacao}}
+  </div>    
   
   <div class="form-group">
     <label>Tags</label>
@@ -20,5 +24,6 @@
     </ul>
   </div>    
   
-  <a href="#noticias/{{noticia.id}}/edit" class="btn btn-default">Editar</a>
+  <a href="#noticias/{{noticia.id}}/edit" class="btn btn-primary">Editar</a>
+  <button class="btn btn-default" ng-click="aprovar()">Aprovar</button>
   <button class="btn btn-danger" ng-click="remove()">Excluir</button>

@@ -21,6 +21,7 @@ public class Noticia {
 	private Long id;
 	private String titulo;
 	private String texto;
+	private String situacao = "Nova";
 	
 	@ManyToMany
 	private List<Tag> tags = new ArrayList<>();
@@ -65,6 +66,12 @@ public class Noticia {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	public String getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 	
 }

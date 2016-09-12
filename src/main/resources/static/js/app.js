@@ -38,7 +38,13 @@ app.config(['$routeProvider', function($routerProvider){
 
 //NoticiaService
 app.factory('NoticiaService', function($resource) {
-	return $resource('/api/noticias/:id', {}, {});
+	return $resource('/api/noticias/:id', {}, {
+		aprovar: {
+			method: 'POST',
+			url: '/api/noticias/:id/aprovar',
+			params: { id: '@id' }
+		}
+	});
 });
 
 //CategoriaService
@@ -56,7 +62,15 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 	
 	$scope.busca = "";
 
-	//Lista
+	//Aprovar
+	$scope.aprovar = function() {
+		NoticiaService.aprovar($scope.noticia, function(noticia) {
+			//Atualiza o objeto noticia na tela
+			$scope.noticia = noticia;
+		});	
+	}
+	
+	//Busca
 	$scope.buscar = function() {
 		$scope.noticias = NoticiaService.query({texto:$scope.busca});	
 	}

@@ -25,7 +25,7 @@ public class NoticiaController {
 	@Autowired NoticiaRepository noticiaRepository;
 
 	/**
-	 * @return Retorna todas as notícias
+	 * @return Busca noticias notícias
 	 */
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<Noticia> find(@RequestParam(required=false) String texto) {
@@ -52,7 +52,18 @@ public class NoticiaController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Noticia show(@PathVariable Long id) {
 		return noticiaRepository.findOne(id);
-	}		
+	}
+	
+	/**
+	 * Aprova uma notícia
+	 */
+	@RequestMapping(value="/{id}/aprovar", method=RequestMethod.POST)
+	public Noticia aprovar(@PathVariable Long id) {
+		Noticia noticia = noticiaRepository.findOne(id);
+		noticia.setSituacao("Aprovada");
+		noticiaRepository.save(noticia);
+		return noticia;
+	}	
 	
 	/**
 	 * Remove uma notícia por id
