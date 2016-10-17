@@ -1,0 +1,27 @@
+<div class="form-group">
+	<label>T&iacute;tulo</label> 
+	{{livro.titulo}}
+</div>
+
+<div class="form-group">
+	<label>ISBN</label> 
+	{{livro.isbn}}
+</div>
+
+<!-- Exibicao dos Capitulos -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Capítulos
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="capitulo in livro.capitulos">
+			{{capitulo.titulo}}<br/>
+			<small>{{capitulo.sinopse}}</small>
+		</li>
+	</ul>
+</div>
+
+
+<a href="#livros/{{livro.id}}/edit" class="btn btn-primary">Editar</a>
+<button class="btn btn-danger" ng-click="remove()">Excluir</button>
+

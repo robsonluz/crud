@@ -5,10 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import edu.fae.crud.model.Capitulo;
 import edu.fae.crud.model.Categoria;
+import edu.fae.crud.model.Livro;
 import edu.fae.crud.model.Noticia;
 import edu.fae.crud.model.Tag;
 import edu.fae.crud.repository.CategoriaRepository;
+import edu.fae.crud.repository.LivroRepository;
 import edu.fae.crud.repository.NoticiaRepository;
 import edu.fae.crud.repository.TagRepository;
 
@@ -17,7 +20,7 @@ public class CrudApplication {
 
 	//Dados iniciais da base de dados
 	@Bean
-	CommandLineRunner runner(NoticiaRepository noticiaRepository, CategoriaRepository categoriaRepository, TagRepository tagRepository){
+	CommandLineRunner runner(NoticiaRepository noticiaRepository, CategoriaRepository categoriaRepository, TagRepository tagRepository, LivroRepository livroRepository){
 		return args -> {
 			
 			Categoria artigos = 
@@ -35,6 +38,15 @@ public class CrudApplication {
 			tagRepository.save(new Tag("Culinária"));
 			tagRepository.save(new Tag("Política"));
 			tagRepository.save(new Tag("Saúde"));
+			
+			Livro l = new Livro("Livro 1", "ABC1");
+			l.getCapitulos().add(new Capitulo("Cap 1"));
+			l.getCapitulos().add(new Capitulo("Cap 2"));
+			l.getCapitulos().add(new Capitulo("Cap 3"));
+					
+			livroRepository.save(l);
+			livroRepository.save(new Livro("Livro 2", "ABC2"));
+			livroRepository.save(new Livro("Livro 3", "ABC3"));
 			
 		};
 	}		
