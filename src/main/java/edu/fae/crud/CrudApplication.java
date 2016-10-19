@@ -10,14 +10,27 @@ import edu.fae.crud.model.Categoria;
 import edu.fae.crud.model.Livro;
 import edu.fae.crud.model.Noticia;
 import edu.fae.crud.model.Tag;
+import edu.fae.crud.model.Usuario;
 import edu.fae.crud.repository.CategoriaRepository;
 import edu.fae.crud.repository.LivroRepository;
 import edu.fae.crud.repository.NoticiaRepository;
 import edu.fae.crud.repository.TagRepository;
+import edu.fae.crud.repository.UsuarioRepository;
 
 @SpringBootApplication
 public class CrudApplication {
 
+	@Bean
+	CommandLineRunner criaUsuarios(UsuarioRepository usuarioRepository){
+		return args -> {
+			Usuario usuario = new Usuario();
+			usuario.setNome("Admin");
+			usuario.setEmail("admin@fae.edu");
+			usuario.setPassword("12345");
+			usuarioRepository.save(usuario);			
+		};
+	}
+	
 	//Dados iniciais da base de dados
 	@Bean
 	CommandLineRunner runner(NoticiaRepository noticiaRepository, CategoriaRepository categoriaRepository, TagRepository tagRepository, LivroRepository livroRepository){

@@ -1,5 +1,20 @@
 var app = angular.module('app', ['ngResource', 'ngRoute', 'fxpicklist']);
 
+//Interceptor de autenticação
+app.factory('authInterceptorService', ['$q', function ($q){
+    return {
+        responseError: function (rejection) {
+            if (rejection.status === 401) {
+                location.href = "/#login";
+            }
+            return $q.reject(rejection);
+        }
+    };
+}]);
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+}]);
+
 /**
  * Configuração das Rotas Principais
  */
@@ -13,8 +28,3 @@ app.config(['$routeProvider', function($routerProvider){
 	;
 }]);
 
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
