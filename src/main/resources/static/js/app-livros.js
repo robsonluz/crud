@@ -44,7 +44,9 @@ app.controller('LivroController', function($scope, $routeParams, $route, $locati
 	}
 	//Novo
 	$scope.create = function() {
-		$scope.livro = {};
+		$scope.livro = {
+				capitulos: []
+		};
 	}
 	
 	//Visualização
