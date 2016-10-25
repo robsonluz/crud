@@ -1,6 +1,5 @@
 package edu.fae.crud;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -34,8 +33,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
         	.authorizeRequests()
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().permitAll()
+                .antMatchers("/api/**").authenticated() //Bloquea o acesso a /api/**
+                .anyRequest().permitAll() //O restante dos requests fica liberado sem login
                 
                 .and()
                 .exceptionHandling()
@@ -43,25 +42,28 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 						@Override
 						public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth)
 								throws IOException, ServletException {
-							response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+							response.sendError(HttpServletResponse.SC_UNAUTHORIZED);//Manda o erro 401 em caso de acesso negado
 						}
 					})
                 .and()
+                //Configuração do Form de Login
                 .formLogin()
                 	.failureHandler(new AuthenticationFailureHandler() {
 						@Override
-						public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth) throws IOException, ServletException {
-							response.sendError(403);
+						public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, 
+								AuthenticationException auth) throws IOException, ServletException {
+							response.sendError(403);//Manda o erro 403, em caso de login invalido
 						}
 					})
-                	.loginProcessingUrl("/login")
-                	.passwordParameter("senha")
-                	.usernameParameter("email")
+                	.loginProcessingUrl("/login") //Url do serviço de Login
+                	.passwordParameter("senha") //Parametro esperado para a senha
+                	.usernameParameter("email") //Parametro esperado para o e-mail
                 	.permitAll()
                 .and()
+                //Configuração do Logout
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutUrl("/logout") //Url de Logout
+                .logoutSuccessUrl("/") //Redirect após o logout
             ;   
     }
     
