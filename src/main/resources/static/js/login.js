@@ -1,7 +1,5 @@
 var app = angular.module('app', []);
 
-
-
 //LivroController
 app.controller('LoginController', function($scope, $http, $httpParamSerializer) {
 	
