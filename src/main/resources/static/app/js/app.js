@@ -4,8 +4,9 @@ var app = angular.module('app', ['ngResource', 'ngRoute', 'fxpicklist']);
 app.factory('authInterceptorService', ['$q', function ($q){
     return {
         responseError: function (rejection) {
-            if (rejection.status === 401) {
-                location.href = "/#login";
+            if (rejection.status === 401) { //Acesso negado
+            	//Redireciona para a tela de login
+                location.href = "/";
             }
             return $q.reject(rejection);
         }
