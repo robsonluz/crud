@@ -1,6 +1,10 @@
 package edu.fae.crud.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.fae.crud.model.Message;
 import edu.fae.crud.model.Noticia;
 import edu.fae.crud.repository.NoticiaRepository;
+import edu.fae.crud.service.FilesService;
 
 /**
  * 
@@ -23,6 +29,7 @@ import edu.fae.crud.repository.NoticiaRepository;
 @RequestMapping("/api/noticias")
 public class NoticiaController {
 	@Autowired NoticiaRepository noticiaRepository;
+	@Autowired FilesService filesService;
 
 	/**
 	 * @return Busca noticias notícias
@@ -72,6 +79,27 @@ public class NoticiaController {
 	public Message delete(@PathVariable Long id) {
 		noticiaRepository.delete(id);
 		return Message.OK;
-	}			
+	}
+	
+	/**
+	 * Upload da imagem da Noticia
+	 */
+	@RequestMapping(value="/{id}/upload", method=RequestMethod.POST)
+	public Noticia upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
+		Noticia noticia = noticiaRepository.findOne(id);
+		
+		//Salva o arquivo na pasta do servidor
+		String imageName = filesService.saveFile(file);
+		//Guardamos na base somente o nome da imagem
+		noticia.setImagem(imageName);
+		
+		noticiaRepository.save(noticia);
+		return noticia;
+	}
+	
+	@RequestMapping(value="/imagens")
+	public void getImagem(@RequestParam("src") String imagem, HttpServletRequest request, HttpServletResponse response) {
+		filesService.showFile(imagem, request, response);
+	}
 	
 }

@@ -37,7 +37,7 @@ app.config(['$routeProvider', function($routerProvider){
 
 
 //NoticiaController
-app.controller('NoticiaController', function($scope, $routeParams, $route, $location, NoticiaService, CategoriaService, TagService) {
+app.controller('NoticiaController', function($scope, $routeParams, $route, $location, Upload, NoticiaService, CategoriaService, TagService) {
 	
 	$scope.busca = "";
 
@@ -93,6 +93,28 @@ app.controller('NoticiaController', function($scope, $routeParams, $route, $loca
 		    	});
 		}
     }	
+	
+	$scope.upload = function(file) {
+		console.log('upload: ');
+		console.log(Upload);
+		
+		Upload.upload({
+		        url: '/api/noticias/' + $scope.noticia.id + '/upload',
+		        data: {file: file}
+		}).then(function (resp) {
+		    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+		    console.log(resp.data);
+		    $scope.noticia = resp.data;
+		});		
+		/*
+		
+		console.log($scope.file);
+		NoticiaService.upload($scope.file, function(data) {
+			console.log('retornou: ');
+			console.log(data);
+		});
+		*/
+	}
 	
 	//Chama o método definido na rota
 	if($route.current.method){ 

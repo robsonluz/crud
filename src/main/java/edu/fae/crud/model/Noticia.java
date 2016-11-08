@@ -22,6 +22,7 @@ public class Noticia {
 	private String titulo;
 	private String texto;
 	private String situacao = "Nova";
+	private String imagem;
 	
 	@ManyToMany
 	private List<Tag> tags = new ArrayList<>();
@@ -72,6 +73,13 @@ public class Noticia {
 	}
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
+	}
+	
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 	
 }

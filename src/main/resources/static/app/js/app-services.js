@@ -5,6 +5,13 @@ app.factory('NoticiaService', function($resource) {
 			method: 'POST',
 			url: '/api/noticias/:id/aprovar',
 			params: { id: '@id' }
+		},
+		upload: {
+			method: 'POST', 
+			url: '/api/noticias/upload',
+			headers: {
+            	"Content-Type": "multipart/form-data;"
+			}			
 		}
 	});
 });

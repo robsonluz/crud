@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngResource', 'ngRoute', 'fxpicklist']);
+var app = angular.module('app', ['ngResource', 'ngRoute', 'fxpicklist', 'ngFileUpload']);
 
 //Interceptor de autenticação
 app.factory('authInterceptorService', ['$q', function ($q){

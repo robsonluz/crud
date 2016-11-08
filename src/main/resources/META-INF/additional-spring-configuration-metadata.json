@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "upload.dir",
+  "type": "java.lang.String",
+  "description": "Diretorio de upload de arquivos"
+}]}
