@@ -85,7 +85,8 @@ public class NoticiaController {
 	 * Upload da imagem da Noticia
 	 */
 	@RequestMapping(value="/{id}/upload", method=RequestMethod.POST)
-	public Noticia upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
+	public Noticia upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) 
+			throws IOException {
 		Noticia noticia = noticiaRepository.findOne(id);
 		
 		//Salva o arquivo na pasta do servidor
@@ -98,7 +99,8 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping(value="/imagens")
-	public void getImagem(@RequestParam("src") String imagem, HttpServletRequest request, HttpServletResponse response) {
+	public void getImagem(@RequestParam("src") String imagem, HttpServletRequest request, 
+			HttpServletResponse response) {
 		filesService.showFile(imagem, request, response);
 	}
 	

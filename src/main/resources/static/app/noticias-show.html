@@ -16,9 +16,9 @@
   </div>    
   
   <div class="form-group">
-    <label>Imagem</label>
-
-	<div class="button" ngf-select="upload($file)">Enviar nova imagem</div>
+	<div class="btn btn-default btn-sm" ngf-select="upload($file)">
+		Enviar imagem
+	</div><br/>
 	<img ng-src="/api/noticias/imagens?src={{noticia.imagem}}"
 		 ng-show="noticia.imagem"
 		 style="width: 200px"/>
